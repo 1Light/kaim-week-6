@@ -1,4 +1,3 @@
-# scripts/feature_engineering.py
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
@@ -52,6 +51,8 @@ class FeatureEngineering:
         # Merge aggregate features with the original DataFrame on CustomerId
         df = df.merge(agg_features, on='CustomerId', how='left')
         return df
+
+
     @staticmethod
     def create_transaction_features(df: pd.DataFrame) -> pd.DataFrame:
         """
@@ -82,6 +83,8 @@ class FeatureEngineering:
         df = pd.merge(df, transaction_features, on='CustomerId', how='left')
 
         return df
+
+
 
     @staticmethod
     def extract_time_features(df: pd.DataFrame) -> pd.DataFrame:

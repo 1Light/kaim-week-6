@@ -1,123 +1,139 @@
-# README for Exploratory Data Analysis and Feature Engineering Project
-## Overview
-This project focuses on performing Exploratory Data Analysis (EDA) and Feature Engineering on a dataset, with the ultimate goal of building a predictive model for credit scoring. The analysis includes understanding the dataset's structure, identifying patterns, and preparing features for modeling.
-## Table of Contents
-1. [Project Structure](#Project-Structure)
-2. [Exploratory Data Analysis (EDA)](#Exploratory-Data-Analysis-EDA)
-+ [Overview of the Data](#Overview-of-the-Data)
-+ [Summary Statistics](#Summary-Statistics)
-+ [Distribution of Numerical Features](#Distribution-of-Numerical-Features)
-+ [Distribution of Categorical Features](#Distribution-of-Categorical-Features)
-+ [Correlation Analysis](#Correlation-Analysis)
-+ [Identifying Missing Values](#Identifying-Missing-Values)
-+ [Outlier Detection](#Outlier-Detection)
-3. [Feature Engineering](#Feature-Engineering)
-+ [Create Aggregate Features](#Create-Aggregate-Features)
-+ [Extract Features](#Extract-Features)
-+ [Encode Categorical Variables](#Encode-Categorical-Variables)
-+ [Handle Missing Values](Handle-Missing-Values)
-+ [Normalize/Standardize Numerical Features](#Normalize/Standardize-Numerical-Features)
-4. [Modeling](#Modeling)
-+ [Model Selection and Training](#Model-Selection-and-Training)
-+ [Model Evalution](#Model-Evalution)
-[Conclusion](#Conclusion)
-## Project Structure
-```|   .gitignore
-|   README.md
-|   requirements.txt
-|   
-+---.github
-|   \---workflows
-+---.vscode
-|       settings
-|       
-+---data
-+---notebooks
-|       __init__.py
-|      credit_score_analysis_notebook.ipynb
-|      eda_analysis_notebook.ipynb  
-+---scripts
-|       __init__.py
-|       load_data.py
-|       feature_engg.py
-|       custom_logger.py
-|       credit_scoring_model.py
-|       credit_eda_visualize.py
-|       credit_eda_analysis.py
-+---src
-|       __init__.py
-|       
-\---tests
-```
-## Exploratory Data Analysis (EDA)
-### Overview of the Data
-Understand the structure of the dataset, including:
-Number of rows
-Number of columns
-Data types for each feature
-### Summary Statistics
-Calculate central tendency measures (mean, median) and dispersion metrics (standard deviation, variance).
-Analyze the shape of the dataset’s distribution.
-### Distribution of Numerical Features
-Visualize distributions using histograms or density plots to identify patterns, skewness, and potential outliers.
-### Distribution of Categorical Features
-Analyze frequency counts and variability within categorical features using bar plots or pie charts.
-### Correlation Analysis
-Assess relationships between numerical features using correlation matrices and heatmaps.
-### Identifying Missing Values
-Identify missing values in the dataset to determine their impact and decide on appropriate imputation strategies.
-### Outlier Detection
-Use box plots to visually identify outliers in numerical features.
-## Feature Engineering
-### Create Aggregate Features
-Examples:
-Total Transaction Amount: Sum of all transaction amounts for each customer.
-Average Transaction Amount: Average transaction amount per customer.
-Transaction Count: Number of transactions per customer.
-Standard Deviation of Transaction Amounts: Variability of transaction amounts per customer.
-### Extract Features
-Examples:
-Transaction Hour: Hour when the transaction occurred.
-Transaction Day: Day of the month when the transaction occurred.
-Transaction Month: Month when the transaction occurred.
-Transaction Year: Year when the transaction occurred.
-### Encode Categorical Variables
-Convert categorical variables into numerical format using:
-One-Hot Encoding: Converts categorical values into binary vectors.
-Label Encoding: Assigns a unique integer to each category.
-### Handle Missing Values
-Options include:
-Imputation: Filling missing values with mean, median, mode, or advanced methods like KNN imputation.
-Removal: Removing rows or columns with few missing values.
-### Normalize/Standardize Numerical Features
-Scaling techniques include:
-Normalization: Scales data to a range of [0, 1].
-Standardization: Scales data to have a mean of 0 and a standard deviation of 1.
-Feature Engineering libraries used:
-xverse
-woe
-## Modeling
-### Model Selection and Training
-Split the Data
+# Bati-Bank-Credit-Scoring-Model
+Credit Scoring Model for Bati Bank's Buy-Now-Pay-Later Service. This project aims to develop a robust credit scoring system by defining risk categories, selecting predictive features, and creating models to estimate risk probabilities, credit scores, and optimal loan terms based on data from a partnering eCommerce platform.
+
+## Project Overview EDA Analysis
+This Task-1 EDA Analysis includes a comprehensive analysis of financial transactions to inform the credit scoring model. The objectives are to understand the dataset's structure, summarize its statistics, and explore relationships between features.
+
+## Completed Tasks
+
+1. **Overview of the Data**: 
+   - Analyzed the structure, including the number of rows, columns, and data types.
+
+2. **Summary Statistics**: 
+   - Generated summary statistics to understand central tendency, dispersion, and shape of distributions.
+
+3. **Distribution of Numerical Features**: 
+   - Visualized distributions to identify patterns, skewness, and potential outliers.
+
+4. **Distribution of Categorical Features**: 
+   - Analyzed categorical features for insights into frequency and variability.
+
+5. **Correlation Analysis**: 
+   - Investigated relationships between numerical features.
+
+6. **Identifying Missing Values**: 
+   - Checked for missing values to determine data completeness.
+
+7. **Outlier Detection**: 
+   - Used box plots to identify outliers.
+
+## Summary of the Dataset
+- **Total Transactions**: 95,662
+- **Attributes**: 15
+  - **Categorical Identifiers**: BatchId, AccountId, CustomerId
+  - **Financial Metrics**: Amount, Value
+  - **Timestamps**: TransactionStartTime
+
+**Missing Values**: None
+
+## Key Insights
+- **Right-Skewness**: Most numerical features are right-skewed, indicating a few extreme values significantly influence the mean.
+- **Prominent Peaks**: Key variables like `CountryCode`, `Amount`, and `Value` show distinct peaks.
+- **Preferred Pricing Strategy**: A strong preference for pricing strategy 2.
+- **Majority Non-Fraudulent Transactions**: The dataset shows a low incidence of fraud.
+
+## Insights from Categorical Features
+- **CurrencyCode**: All transactions are in UGX (Ugandan Shilling).
+- **ProviderId**: Dominated by two providers.
+- **ProductCategory**: Primarily consists of airtime and financial services.
+- **ChannelId**: Most transactions occur via two preferred channels.
+
+## Correlation Analysis
+- **Amount and Value**: Strong positive correlation; consider removing `Value` for modeling.
+- **PricingStrategy**: No significant correlation with other features.
+
+## Outlier Analysis
+- Significant outliers identified in `Amount` and `Value`, warranting further investigation.
+
+## **Feature Engineering Process**
+
+The feature engineering process involves several key steps to prepare the dataset for analysis and model training:
+
+## **Steps Involved**
+
+1. **Encoding Categorical Variables**:
+   - Categorical variables were encoded using one-hot encoding to convert them into a numerical format suitable for machine learning algorithms.
+
+2. **Standardizing Numerical Features**:
+   - Numerical features were standardized using the `StandardScaler`. This ensures consistency in scale across features, which is crucial for many machine learning models.
+
+3. **Handling Missing Values**:
+   - During the feature engineering process, the new feature `Std_Transaction_Amount` was found to have **712 missing values**. To ensure data completeness, these missing values were imputed with the mean of the feature.
+
+## **Summary**
+
+These steps improve the quality of the dataset, making it more suitable for further analysis and predictive modeling. Proper encoding, scaling, and handling of missing values are essential for building effective machine learning models.
+
+## **Modeling**
+
+### **Model Selection and Training**
+
+### **Split the Data**
 Divide the dataset into training and testing sets to evaluate model performance on unseen data.
-Choose Models
-Select at least two models from:
-Logistic Regression
-Decision Trees
-Random Forest
-Gradient Boosting Machines (GBM)
-Train the Models
-Train selected models on the training dataset.
-Hyperparameter Tuning
+
+### **Choose Models**
+Select at least two models from the following options:
+- Logistic Regression
+- Decision Trees
+- Random Forest
+- Gradient Boosting Machines (GBM)
+
+### **Train the Models**
+Train the selected models on the training dataset.
+
+### **Hyperparameter Tuning**
 Enhance model performance through hyperparameter tuning using techniques like:
-Grid Search
-Random Search
-### Model Evaluation
+- Grid Search
+- Random Search
+
+## **Model Evaluation**
 Assess model performance using metrics such as:
-Accuracy: Ratio of correctly predicted observations to total observations.
-Precision: Ratio of correctly predicted positive observations to total predicted positives.
-Recall (Sensitivity): Ratio of correctly predicted positive observations to all actual positives.
-F1 Score: Weighted average of Precision and Recall.
-ROC-AUC: Area Under the Receiver Operating Characteristic Curve, measuring model's ability to distinguish between classes.
-## Conclusion
-This README provides a comprehensive overview of the EDA and feature engineering processes applied in this project. By following these structured tasks, you can gain insights from your dataset and prepare it for effective modeling.
+- **Accuracy**: Ratio of correctly predicted observations to total observations.
+- **Precision**: Ratio of correctly predicted positive observations to total predicted positives.
+- **Recall (Sensitivity)**: Ratio of correctly predicted positive observations to all actual positives.
+- **F1 Score**: Weighted average of Precision and Recall.
+- **ROC-AUC**: Area Under the Receiver Operating Characteristic Curve, measuring the model's ability to distinguish between classes.
+
+
+# Folder Structure
+```
++---.github
+| └── workflows
+| └── blank.yml
++---.vscode
+| └── settings.json
++---notebooks
+| ├── init.ipynb
+| ├── eda_analysis.ipynb
+| ├── feature_engineering.ipynb
+| └── README.md
++---scripts
+| ├── init.py
+| ├── data_loader.py
+| ├── eda_analysis.py
+| ├── feature_engineering.py
+| └── README.md
++---src
+| └── README.md
+| └── init.py
++---tests
+| └── init.py
+| ├── README.md
+| └── test_data_loader.py
+| └── test_eda_analysis.py
+| └── test_feature_engineering.py
+| ├── .gitignore
+| ├── LICENSE
+| ├── README.md
+| └── requirements.txt
+```
